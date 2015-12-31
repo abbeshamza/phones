@@ -1,0 +1,33 @@
+﻿		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-2">
+				  <!--Sidebar content-->
+
+					Rechercher dans le tableau: <input ng-model="query">
+			
+					<br>
+					Trier par:
+					<select ng-model="orderProp">
+					  <option value="name">Par ordre alphabétique</option>
+					  <option value="age">Le plus récent</option>
+					</select>
+				</div>
+				<div class="col-md-10">
+					<ul class="phones">
+						<li ng-repeat="phone in phones | filter:query | orderBy:orderProp" class="thumbnail">
+						<!-- Si on utilise src, le navigateur tente de charger l'image avant le chargement du controluer.
+						Donc il va essayer de charger l'url {{phone.imageUrl}} sans interpréter les {{}}. Donc il ne l'a trouve pas
+						. Apresè initilialisation du contrôleur, il comprend qu'il doit remplacer cette écriturepar la vraie valeur
+						{{phone.imageUrl}}.
+						Pour éviter ce problème, on utilise ng-src 
+						-->
+							<a href="#/phones/{{phone.id}}" class="thumb"><img ng-src="{{phone.imageUrl}}"></a>
+							<a href="#/phones/{{phone.id}}">{{phone.name}}</a>
+							<p>{{phone.snippet}}</p>
+							</li>
+					</ul>
+
+					<p>Total number of phones: {{phones.length}}</p>
+				</div>
+			</div>
+		</div>
